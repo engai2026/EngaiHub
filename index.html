@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EngAI Hub | Grado en Ingeniería en Inteligencia Artificial</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --card-border: rgba(51, 65, 85, 0.8);
+            --card-hover-border: #6366f1;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-color: #818cf8;
+            --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            --badge-bg: rgba(99, 102, 241, 0.15);
+            --badge-text: #818cf8;
+            --btn-bg: rgba(30, 41, 59, 0.8);
+            --btn-hover: rgba(51, 65, 85, 1);
+            --shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f8fafc;
+            --card-bg: rgba(255, 255, 255, 0.9);
+            --card-border: #e2e8f0;
+            --card-hover-border: #4f46e5;
+            --text-main: #0f172a;
+            --text-muted: #64748b;
+            --accent-color: #4f46e5;
+            --accent-gradient: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%);
+            --badge-bg: rgba(79, 70, 229, 0.1);
+            --badge-text: #4f46e5;
+            --btn-bg: #ffffff;
+            --btn-hover: #f1f5f9;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 40px;
+            border-bottom: 1px solid var(--card-border);
+            padding-bottom: 20px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 10px;
+            background: var(--accent-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+        }
+
+        .brand-text h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: -0.025em;
+            line-height: 1.2;
+        }
+
+        .brand-text span {
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .controls {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-control {
+            background-color: var(--btn-bg);
+            border: 1px solid var(--card-border);
+            color: var(--text-main);
+            padding: 8px 14px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+        }
+
+        .btn-control:hover {
+            background-color: var(--btn-hover);
+            border-color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-bottom: 35px;
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: var(--badge-bg);
+            color: var(--badge-text);
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 12px;
+        }
+
+        p.subtitle {
+            color: var(--text-muted);
+            font-size: 1.05rem;
+            line-height: 1.5;
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 24px;
+            text-decoration: none;
+            color: inherit;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--accent-gradient);
+            opacity: 0;
+            transition: opacity 0.25s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            border-color: var(--card-hover-border);
+            box-shadow: 0 20px 35px -10px rgba(99, 102, 241, 0.15);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: var(--badge-bg);
+            color: var(--badge-text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-icon svg {
+            width: 22px;
+            height: 22px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 2;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .arrow-icon {
+            color: var(--text-muted);
+            transition: transform 0.2s ease, color 0.2s ease;
+        }
+
+        .card:hover .arrow-icon {
+            transform: translate(2px, -2px);
+            color: var(--accent-color);
+        }
+
+        .card h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            letter-spacing: -0.01em;
+        }
+
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            border-top: 1px solid var(--card-border);
+            padding-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            .controls {
+                width: 100%;
+                justify-content: space-between;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <div class="brand">
+                <div class="logo-icon">AI</div>
+                <div class="brand-text">
+                    <h1 id="brand-title">EngAI Hub</h1>
+                    <span id="degree-tag">Ingeniería en IA</span>
+                </div>
+            </div>
+            <div class="controls">
+                <button id="themeToggle" class="btn-control" onclick="toggleTheme()">
+                    <span id="themeIcon">☀️</span> <span id="themeText">Light</span>
+                </button>
+                <button id="langToggle" class="btn-control" onclick="toggleLanguage()">
+                    🌐 <span id="langText">English</span>
+                </button>
+            </div>
+        </header>
+
+        <section class="hero">
+            <span class="badge" id="badge-text">Grado en Ingeniería en Inteligencia Artificial</span>
+            <p class="subtitle" id="subtitle">Recursos interactivos y herramientas de apoyo académico diseñados para visualizar y dominar los conceptos clave de la titulación:</p>
+        </section>
+
+        <main class="grid">
+            <!-- Calculus Lab -->
+            <a href="./CalculusLab/" class="card">
+                <div>
+                    <div class="card-top">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24"><path d="M4 19h16M4 15h4m-4-4h8m-8-4h12"/></svg>
+                        </div>
+                        <div class="arrow-icon">↗</div>
+                    </div>
+                    <h3>Calculus Lab</h3>
+                    <p id="desc-calculus">Herramientas interactivas y ejercicios guiados diseñados para visualizar conceptos abstractos de cálculo (límites, derivadas e integración) y asimilar su aplicación práctica paso a paso.</p>
+                </div>
+            </a>
+
+            <!-- Linear Algebra Lab -->
+            <a href="./LinearAlgebraLab/" class="card">
+                <div>
+                    <div class="card-top">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
+                        </div>
+                        <div class="arrow-icon">↗</div>
+                    </div>
+                    <h3>Linear Algebra Lab</h3>
+                    <p id="desc-algebra">Entorno para la práctica y visualización de matrices, espacios vectoriales y transformaciones lineales, facilitando la comprensión intuitiva de las estructuras matemáticas fundamentales.</p>
+                </div>
+            </a>
+
+            <!-- Led Lab -->
+            <a href="./LedLab/" class="card">
+                <div>
+                    <div class="card-top">
+                        <div class="card-icon">
+                            <svg viewBox="0 0 24 24"><path d="M12 2v4m0 12v4M4.93 4.93l2.83 2.83m8.48 8.48l2.83 2.83M2 12h4m12 0h4M4.93 19.07l2.83-2.83m8.48-8.48l2.83-2.83"/></svg>
+                        </div>
+                        <div class="arrow-icon">↗</div>
+                    </div>
+                    <h3>Led Lab</h3>
+                    <p id="desc-led">Laboratorio práctico de sistemas embebidos y hardware, orientado a entender el control de componentes electrónicos, microcontroladores y programación a bajo nivel.</p>
+                </div>
+            </a>
+        </main>
+    </div>
+
+    <footer>
+        <p id="footer-text">© 2026 EngAI Projects • Grado en Ingeniería en Inteligencia Artificial</p>
+    </footer>
+
+    <script>
+        const content = {
+            es: {
+                degreeTag: "Ingeniería en IA",
+                badge: "Grado en Ingeniería en Inteligencia Artificial",
+                subtitle: "Recursos interactivos y herramientas de apoyo académico diseñados para visualizar y dominar los conceptos clave de la titulación:",
+                calculus: "Herramientas interactivas y ejercicios guiados diseñados para visualizar conceptos abstractos de cálculo (límites, derivadas e integración) y asimilar su aplicación práctica paso a paso.",
+                algebra: "Entorno para la práctica y visualización de matrices, espacios vectoriales y transformaciones lineales, facilitando la comprensión intuitiva de las estructuras matemáticas fundamentales.",
+                led: "Laboratorio práctico de sistemas embebidos y hardware, orientado a entender el control de componentes electrónicos, microcontroladores y programación a bajo nivel.",
+                footer: "© 2026 EngAI Projects • Grado en Ingeniería en Inteligencia Artificial",
+                langBtn: "English"
+            },
+            en: {
+                degreeTag: "AI Engineering",
+                badge: "B.Sc. in Artificial Intelligence Engineering",
+                subtitle: "Interactive resources and academic support tools designed to visualize and master core course concepts in AI Engineering:",
+                calculus: "Interactive tools and guided exercises designed to visualize abstract calculus concepts (limits, derivatives, and integration) and grasp their practical applications step by step.",
+                algebra: "An environment for practicing and visualizing matrices, vector spaces, and linear transformations, fostering an intuitive understanding of core mathematical structures.",
+                led: "A hands-on embedded systems and hardware lab focused on understanding electronic component control, microcontrollers, and low-level programming.",
+                footer: "© 2026 EngAI Projects • B.Sc. in AI Engineering",
+                langBtn: "Español"
+            }
+        };
+
+        let currentLang = 'es';
+        let currentTheme = 'dark';
+
+        try {
+            currentLang = localStorage.getItem('preferredLang') || 'es';
+            currentTheme = localStorage.getItem('preferredTheme') || 'dark';
+        } catch (e) {
+            console.warn("LocalStorage no disponible en este entorno local.");
+        }
+
+        function applySettings() {
+            document.documentElement.lang = currentLang;
+            document.getElementById('degree-tag').innerText = content[currentLang].degreeTag;
+            document.getElementById('badge-text').innerText = content[currentLang].badge;
+            document.getElementById('subtitle').innerText = content[currentLang].subtitle;
+            document.getElementById('desc-calculus').innerText = content[currentLang].calculus;
+            document.getElementById('desc-algebra').innerText = content[currentLang].algebra;
+            document.getElementById('desc-led').innerText = content[currentLang].led;
+            document.getElementById('footer-text').innerText = content[currentLang].footer;
+            document.getElementById('langText').innerText = content[currentLang].langBtn;
+
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            if (currentTheme === 'dark') {
+                themeIcon.innerText = '☀️';
+                themeText.innerText = currentLang === 'es' ? 'Claro' : 'Light';
+            } else {
+                themeIcon.innerText = '🌙';
+                themeText.innerText = currentLang === 'es' ? 'Oscuro' : 'Dark';
+            }
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            try { localStorage.setItem('preferredLang', currentLang); } catch (e) {}
+            applySettings();
+        }
+
+        function toggleTheme() {
+            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            try { localStorage.setItem('preferredTheme', currentTheme); } catch (e) {}
+            applySettings();
+        }
+
+        applySettings();
+    </script>
+
+</body>
+</html>
